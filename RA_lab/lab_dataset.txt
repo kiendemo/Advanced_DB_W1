@@ -1,0 +1,143 @@
+group: Campus Collaboration Lab
+description[[
+A compact university dataset for a hands-on relational algebra lab.
+
+Relations:
+* Student(sid, sname, dept, year)
+* Course(cid, title, dept, level)
+* Enrollment(sid, cid, term, grade)
+* Club(club_id, club_name, category)
+* Membership(sid, club_id, role)
+* Project(pid, ptitle, theme, lead_sid)
+* WorksOn(sid, pid, hours)
+
+The data deliberately includes duplicate student names, a student with one enrollment,
+a student with no enrollment, students with no clubs, a course with no enrollments,
+cross-department enrollments and collaborations, and a project with no contributors.
+]]
+
+
+Student = {sid:string, sname:string, dept:string, year:number
+  'S01', 'Alice Chen', 'CS', 2
+  'S02', 'Ben Ortiz', 'CS', 3
+  'S03', 'Cara Singh', 'DATA', 4
+  'S04', 'Diego Moss', 'ROB', 1
+  'S05', 'Erin Park', 'DATA', 2
+  'S06', 'Alex Lee', 'CS', 4
+  'S07', 'Gia Kim', 'ROB', 3
+  'S08', 'Hugo Ross', 'MATH', 2
+  'S09', 'Iris Chen', 'CS', 1
+  'S10', 'Jae Patel', 'DATA', 3
+  'S11', 'Alex Lee', 'MATH', 4
+  'S12', 'Lina Gomez', 'CS', 2
+  'S13', 'Nia Brooks', 'MATH', 1
+}
+
+Course = {cid:string, title:string, dept:string, level:number
+  'C101', 'Database Systems', 'CS', 300
+  'C102', 'Algorithms', 'CS', 300
+  'C103', 'Data Visualization', 'DATA', 200
+  'C104', 'Machine Learning', 'DATA', 400
+  'C105', 'Robotics Studio', 'ROB', 300
+  'C106', 'Discrete Mathematics', 'MATH', 200
+  'C107', 'Ethics of AI', 'HUM', 200
+  'C108', 'Operating Systems', 'CS', 400
+}
+
+Enrollment = {sid:string, cid:string, term:string, grade:number
+  'S01', 'C101', '2026S', 88
+  'S01', 'C102', '2026S', 91
+  'S01', 'C107', '2026S', 85
+  'S02', 'C101', '2026S', 76
+  'S02', 'C102', '2026S', 82
+  'S02', 'C105', '2026S', 79
+  'S03', 'C103', '2026S', 93
+  'S03', 'C104', '2026S', 89
+  'S03', 'C107', '2026S', 90
+  'S04', 'C105', '2026S', 84
+  'S04', 'C106', '2026S', 72
+  'S05', 'C103', '2026S', 81
+  'S05', 'C101', '2026S', 78
+  'S05', 'C107', '2026S', 87
+  'S06', 'C101', '2026S', 95
+  'S06', 'C102', '2026S', 94
+  'S06', 'C104', '2026S', 92
+  'S06', 'C107', '2026S', 90
+  'S07', 'C105', '2026S', 88
+  'S07', 'C101', '2026S', 70
+  'S08', 'C106', '2026S', 90
+  'S08', 'C107', '2026S', 75
+  'S09', 'C101', '2026S', 83
+  'S09', 'C102', '2026S', 79
+  'S10', 'C103', '2026S', 86
+  'S10', 'C104', '2026S', 88
+  'S10', 'C102', '2026S', 77
+  'S11', 'C106', '2026S', 85
+  'S11', 'C102', '2026S', 80
+  'S12', 'C107', '2026S', 88
+}
+
+Club = {club_id:string, club_name:string, category:string
+  'K1', 'AI Society', 'tech'
+  'K2', 'Robotics Club', 'tech'
+  'K3', 'Data for Good', 'service'
+  'K4', 'Chess Circle', 'recreation'
+  'K5', 'Debate Union', 'academic'
+}
+
+Membership = {sid:string, club_id:string, role:string
+  'S01', 'K1', 'member'
+  'S01', 'K3', 'coordinator'
+  'S02', 'K1', 'treasurer'
+  'S02', 'K4', 'member'
+  'S03', 'K1', 'member'
+  'S03', 'K3', 'president'
+  'S04', 'K2', 'member'
+  'S05', 'K3', 'member'
+  'S05', 'K5', 'member'
+  'S06', 'K1', 'president'
+  'S06', 'K2', 'member'
+  'S06', 'K4', 'member'
+  'S07', 'K2', 'president'
+  'S07', 'K3', 'member'
+  'S08', 'K4', 'member'
+  'S09', 'K1', 'member'
+  'S10', 'K3', 'treasurer'
+  'S10', 'K5', 'member'
+  'S11', 'K4', 'president'
+  'S11', 'K5', 'member'
+}
+
+Project = {pid:string, ptitle:string, theme:string, lead_sid:string
+  'P1', 'Smart Campus', 'AI', 'S01'
+  'P2', 'Flood Mapper', 'Data', 'S03'
+  'P3', 'Delivery Rover', 'Robotics', 'S07'
+  'P4', 'Study Buddy', 'Education', 'S06'
+  'P5', 'Energy Dashboard', 'Data', 'S05'
+  'P6', 'Accessible Maps', 'Civic', 'S10'
+  'P7', 'Autonomous Garden', 'Robotics', 'S04'
+  'P8', 'Quantum Tutor', 'Education', 'S12'
+}
+
+WorksOn = {sid:string, pid:string, hours:number
+  'S01', 'P1', 10
+  'S01', 'P2', 4
+  'S02', 'P1', 6
+  'S02', 'P4', 5
+  'S03', 'P2', 12
+  'S03', 'P5', 3
+  'S04', 'P3', 7
+  'S04', 'P7', 10
+  'S05', 'P2', 5
+  'S05', 'P5', 9
+  'S05', 'P6', 4
+  'S06', 'P1', 8
+  'S06', 'P4', 11
+  'S07', 'P3', 12
+  'S07', 'P7', 6
+  'S08', 'P6', 5
+  'S09', 'P1', 3
+  'S10', 'P2', 6
+  'S10', 'P6', 10
+  'S11', 'P4', 4
+}
